@@ -71,6 +71,8 @@ export default function Home() {
 
         const profilePictureUrl = data[0]["profile_picture_url"];
         const userId = data[0]["id"];
+        setProfilePictureUrl(profilePictureUrl);
+        setUserId(userId);
         if (userId !== userId) {
           router.push("/");
         }
@@ -142,13 +144,14 @@ export default function Home() {
           className="rounded-full"
         />
       )}
+      <h1>{`pluscard.mn/${creatorSlug}`}</h1>
       {links?.map((link: Link, index: number) => (
         <div
-          className="shadow-xl w-96 bg-indigo-500 mt-4 p-4 rounded-lg text-center text-white"
+          className="shadow-md hover:translate-x-1 hover:translate-y-1 shadow-lime-200 w-96 bg-lime-300 mt-4 p-4 rounded-lg text-center font-bold cursor-pointer  text-gray-900"
           key={index}
           onClick={(e) => {
             e.preventDefault();
-            window.location.href = link.url;
+            window.open(link.url, "_blank");
           }}
         >
           {link.title}
@@ -202,7 +205,7 @@ export default function Home() {
                 alt="profile-picture"
               />
             )}
-            <ImageUploading
+            {/* <ImageUploading
               multiple
               value={images}
               onChange={onChange}
@@ -229,7 +232,7 @@ export default function Home() {
                   )}
                 </div>
               )}
-            </ImageUploading>
+            </ImageUploading> */}
 
             <button
               type="button"
