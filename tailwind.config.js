@@ -5,7 +5,14 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["Poppins", "sans-serif"],
+      },
+      backgroundImage: {
+        hero: "url('../public/img/noise.webp')",
+      },
+    },
   },
   plugins: [require("@tailwindcss/forms")],
 };

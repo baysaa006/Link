@@ -134,7 +134,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col    items-center  pb-4 justify-between w-full h-screen ">
+    <div className="flex flex-col   items-center  pb-4 justify-between w-full h-screen ">
       <div className="py-8 flex  gap-3 flex-col h-fit w-full justify-between items-center mt-4">
         {profilePictureUrl && (
           <Image
