@@ -5,7 +5,7 @@ import Navbar from "../component/navbar";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Component {...pageProps} />
     </>
   );
