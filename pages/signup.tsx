@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useState } from "react";
 import supabase from "../utils/supabaseClient";
 
@@ -36,65 +37,62 @@ export default function Signup() {
     }
   }
   return (
-    <div className="flex flex-col w-full justify-center items-center">
-      <label
-        htmlFor="email"
-        className="block text-sm font-medium text-gray-700"
-      >
-        Email
-      </label>
-      <div className="mt-1">
-        <input
-          type="email"
-          name="email"
-          id="email"
-          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          placeholder="you@example.com"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
+    <>
+      <Head>
+        <title>Бүртгүүлэх</title>
+      </Head>
+      <div className="flex  h-screen flex-col  gap-[1vw]   w-full justify-center items-center">
+        <label htmlFor="email" className="block text-sm font-medium ">
+          <h1 className="text-base">Таних нэр</h1>
+        </label>
+        <div className="mt-1">
+          <input
+            type="text"
+            name="username"
+            id="username"
+            className="block w-full rounded-md text-black border-gray-300 shadow-sm focus:border-lime-500 focus:ring-lime-500 sm:text-sm"
+            placeholder="chatly.mn/нэр"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <label htmlFor="email" className="block text-sm font-medium ">
+          <h1 className="text-base"> И-Майл</h1>
+        </label>
+        <div className="mt-1">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            className="block w-full rounded-md text-black border-gray-300 shadow-sm focus:border-lime-500 focus:ring-lime-500 sm:text-sm"
+            placeholder="you@example.com"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
 
-      <label
-        htmlFor="password"
-        className="block text-sm font-medium text-gray-700 mt-4"
-      >
-        Password
-      </label>
-      <div className="mt-1">
-        <input
-          type="password"
-          name="password"
-          id="password"
-          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          placeholder="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <label
+          htmlFor="password"
+          className="block text-sm font-medium text-white mt-4"
+        >
+          <h1 className="text-base">Нууц үг</h1>
+        </label>
+        <div className="mt-1">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            className="block w-full rounded-md text-black border-gray-300 shadow-sm focus:border-lime-500 focus:ring-lime-500 sm:text-sm"
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button
+          type="button"
+          className="inline-flex items-center rounded-md border border-transparent bg-lime-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 mt-4"
+          onClick={signUpWithEmail}
+        >
+          Бүртгүүлэх
+        </button>
       </div>
-
-      <label
-        htmlFor="username"
-        className="block text-sm font-medium text-gray-700 mt-4"
-      >
-        username
-      </label>
-      <div className="mt-1">
-        <input
-          type="text"
-          name="username"
-          id="username"
-          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          placeholder="youraveragetechbro"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-
-      <button
-        type="button"
-        className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mt-4"
-        onClick={signUpWithEmail}
-      >
-        Sign up
-      </button>
-    </div>
+    </>
   );
 }

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import supabase from "../../utils/supabaseClient";
 import { profile } from "console";
+import Head from "next/head";
 
 type Link = {
   title: string;
@@ -37,7 +38,6 @@ export default function Home() {
         setUserId(userId);
       }
     };
-
     getUser();
   }, []);
 
@@ -57,7 +57,7 @@ export default function Home() {
     };
     if (userId) {
       getLinks();
-    }
+    } 
   }, [userId]);
 
   useEffect(() => {
@@ -134,91 +134,93 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col   items-center  pb-4 justify-between w-full h-screen ">
-      <div className="py-8 flex  gap-3 flex-col h-fit w-full justify-between items-center mt-4">
-        {profilePictureUrl && (
-          <Image
-            src={profilePictureUrl}
-            alt="profile-picture"
-            height={100}
-            width={100}
-            className="rounded-full border-2 border-lime-300"
-          />
-        )}
-        <div className="flex">
-          <h1
-            className="cursor-pointer font-effect-fire-animation"
-            onClick={(e) => {
-              e.preventDefault();
-              window.open(`${creatorSlug}`, "_blank");
-            }}
-          >{`@${creatorSlug}`}</h1>
-          <i>🥳</i>
-        </div>
-
-        {links?.map((link: Link, index: number) => (
-          <div
-            className="shadow-md hover:translate-x-1 hover:translate-y-1 shadow-lime-200 w-96 bg-lime-300 mt-4 p-4 rounded-lg text-center font-bold cursor-pointer  text-gray-900"
-            key={index}
-            onClick={(e) => {
-              e.preventDefault();
-              window.open(link.url, "_blank");
-            }}
-          >
-            {link.title}
+    <>
+      <Head>
+        <title>{creatorSlug}</title>
+      </Head>
+      <div className="flex flex-col   items-center  pb-4 justify-between w-full h-screen ">
+        <div className="py-8 flex  gap-3 flex-col h-fit w-full justify-between items-center mt-4">
+          {profilePictureUrl && (
+            <Image
+              src={profilePictureUrl}
+              alt="profile-picture"
+              height={100}
+              width={100}
+              className="rounded-full border-2 border-lime-300"
+            />
+          )}
+          <div className="flex">
+            <h1
+              className="cursor-pointer font-effect-fire-animation"
+              onClick={(e) => {
+                e.preventDefault();
+                window.open(`${creatorSlug}`, "_blank");
+              }}
+            >{`@${creatorSlug}`}</h1>
+            <i>🥳</i>
           </div>
-        ))}
-        {isAuthenticated && (
-          <>
-            <div>
-              <h1> New link creation </h1>
-              <div className="mt-4">
-                <div className="block text-sm font-medium text-gray-700">
-                  Title
-                </div>
-                <input
-                  type="text"
-                  name="title"
-                  id="title"
-                  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  placeholder="my awesome link"
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-              </div>
 
-              <div className="mt-4">
-                <div className="block text-sm font-medium text-gray-700">
-                  URL
-                </div>
-                <input
-                  type="text"
-                  name="url"
-                  id="url"
-                  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  placeholder="https://www.youtube.com/c/YourAverageTechBro"
-                  onChange={(e) => setUrl(e.target.value)}
-                />
-              </div>
-              <button
-                type="button"
-                className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mt-4"
-                onClick={addNewLink}
-              >
-                Add new link
-              </button>
+          {links?.map((link: Link, index: number) => (
+            <div
+              className="shadow-md hover:translate-x-1 hover:translate-y-1 shadow-lime-200 w-96 bg-lime-300 mt-4 p-4 rounded-lg text-center font-bold cursor-pointer  text-gray-900"
+              key={index}
+              onClick={(e) => {
+                e.preventDefault();
+                window.open(link.url, "_blank");
+              }}
+            >
+              {link.title}
             </div>
+          ))}
+          {isAuthenticated && (
+            <>
+              <div>
+                <h1> Шинэ линк үүсгэх </h1>
+                <div className="mt-4">
+                  <div className="block text-sm font-medium text-white">
+                    Title
+                  </div>
+                  <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    className="block w-full rounded-md text-black border-gray-300 shadow-sm focus:border-lime-500 focus:ring-lime-500 sm:text-sm"
+                    placeholder="my awesome link"
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                </div>
 
-            <div>
-              <h1> Image uploading </h1>
-              {images.length > 0 && (
-                <Image
-                  src={images[0]["data_url"]}
-                  height={100}
-                  width={100}
-                  alt="profile-picture"
-                />
-              )}
-              {/* <ImageUploading
+                <div className="mt-4">
+                  <div className="block text-sm font-medium white">URL</div>
+                  <input
+                    type="text"
+                    name="url"
+                    id="url"
+                    className="block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-lime-500 focus:ring-lime-500 sm:text-sm"
+                    placeholder="https://www.youtube.com"
+                    onChange={(e) => setUrl(e.target.value)}
+                  />
+                </div>
+                <button
+                  type="button"
+                  className="inline-flex items-center rounded-md border border-transparent bg-lime-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 mt-4"
+                  onClick={addNewLink}
+                >
+                  Линк нэмэх
+                </button>
+              </div>
+
+              <div>
+                <h1> Image uploading </h1>
+                {images.length > 0 && (
+                  <Image
+                    src={images[0]["data_url"]}
+                    height={100}
+                    width={100}
+                    alt="profile-picture"
+                  />
+                )}
+                {/* <ImageUploading
               multiple
               value={images}
               onChange={onChange}
@@ -247,17 +249,18 @@ export default function Home() {
               )}
             </ImageUploading> */}
 
-              <button
-                type="button"
-                className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mt-4"
-                onClick={uploadProfilePicture}
-              >
-                Upload profile picture
-              </button>
-            </div>
-          </>
-        )}
+                <button
+                  type="button"
+                  className="inline-flex items-center rounded-md border border-transparent bg-lime-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 mt-4"
+                  onClick={uploadProfilePicture}
+                >
+                  Upload profile picture
+                </button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
