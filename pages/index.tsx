@@ -1,7 +1,10 @@
 import Head from "next/head";
 import router from "next/router";
 import React, { useState } from "react";
-import Navbar from "../component/navbar";
+import Image from "next/image";
+import logo from "../public/favicon.svg";
+import Signup from "../component/signup";
+import Login from "../component/login";
 
 function Home() {
   const [active, setActive] = useState(0);
@@ -9,13 +12,12 @@ function Home() {
     <>
       <Head>
         <title>Chatly</title>
-        
       </Head>
       <div className="h-screen">
-        <div className="h-screen  flex flex-col items-center bg-opacity-5 mix-blend-hard-light rounded-2xl border-2 w-full p-6">
-          <div className="w-full text-xl font-extrabold rounded-2xl border-2 h-max  items-center flex flex-row justify-around py-4 px-4">
+        <div className="h-screen  flex flex-col items-center bg-opacity-5 mix-blend-hard-light rounded-2xl border-2 w-full p-4">
+          <div className="w-full text-xl font-extrabold rounded-2xl border-2 h-max  items-center flex flex-row justify-around p-3">
             <a
-              className={`font-extrabold   cursor-pointer border-2 rounded-2xl p-2 ${
+              className={`font-extrabold  flex  cursor-pointer  rounded-2xl p-2 ${
                 active === 0
                   ? "text-lime-200  animate-pulse opacity-100 shadow-md shadow-lime-200 "
                   : ""
@@ -23,62 +25,63 @@ function Home() {
               onClick={() => setActive(0)}
             >
               {" "}
+              <Image height={25} src={logo} alt="logo" />
               <h1>Chatly</h1>
             </a>
             <ul className="flex flex-row gap-[2vw]">
               <li
-                className={`font-extrabold  cursor-pointer  border-2 rounded-2xl p-2 ${
+                className={`font-extrabold  cursor-pointer  rounded-2xl p-2 ${
                   active === 1
                     ? "text-lime-200  animate-pulse opacity-100 shadow-md shadow-lime-200"
                     : ""
                 }`}
                 onClick={() => setActive(1)}
               >
-                <a>Энэ юу вэ?</a>
+                <a>What is Chatly ?</a>
               </li>
               <li
-                className={`font-extrabold  cursor-pointer  border-2 rounded-2xl p-2  ${
+                className={`font-extrabold  cursor-pointer   rounded-2xl p-2  ${
                   active === 2
                     ? "text-lime-200 animate-pulse opacity-100 shadow-md shadow-lime-200 "
                     : ""
                 }`}
                 onClick={() => setActive(2)}
               >
-                <a>ХэзээЮ</a>
+                <a>How to ?</a>
               </li>
               <li
-                className={`font-extrabold  cursor-pointer  border-2 rounded-2xl p-2  ${
+                className={`font-extrabold  cursor-pointer   rounded-2xl p-2  ${
                   active === 3
                     ? "text-lime-200  animate-pulse opacity-100 shadow-md shadow-lime-200 "
                     : ""
                 }`}
                 onClick={() => setActive(3)}
               >
-                <a>Хэд ю вэ?</a>
+                <a>How much?</a>
               </li>
               <li
-                className={`font-extrabold  text-xl cursor-pointer border-2   rounded-2xl p-2  ${
+                className={`font-extrabold  text-xl cursor-pointer   rounded-2xl p-2  ${
                   active === 4
                     ? "text-lime-200  animate-pulse opacity-100 shadow-md shadow-lime-200 "
                     : ""
                 }`}
                 onClick={() => setActive(4)}
               >
-                <a>Дугаараа?</a>
+                <a>?</a>
               </li>
             </ul>
             <div className="flex flex-row gap-[1vw] ">
               <button
-                onClick={() => router.push("/login")}
+                onClick={() => setActive(5)}
                 className="px-4 py-1 border-2 hover:text-lime-200 rounded-2xl "
               >
-                Нэвтрэх
+                Log in
               </button>{" "}
               <button
-                onClick={() => router.push("/signup")}
+                onClick={() => setActive(6)}
                 className="px-4 py-1 text-center  hover:text-lime-200 border-2 rounded-2xl "
               >
-                Бүртгүүлэх
+                Sign up
               </button>{" "}
             </div>
           </div>
@@ -103,8 +106,18 @@ function Home() {
             </div>
           )}
           {active === 4 && (
-            <div className="w-full rounded-2xl border-2 shadow-lg shadow-lime-200  h-screen p-4 mt-4">
+            <div className="w-full rounded-2xl border-2  items-center justify-center shadow-lg shadow-lime-200  h-screen p-4 mt-4">
               4
+            </div>
+          )}
+          {active === 5 && (
+            <div className="w-full rounded-2xl border-2 shadow-lg shadow-lime-200  h-screen p-4 mt-4">
+              <Login />
+            </div>
+          )}
+          {active === 6 && (
+            <div className="w-full rounded-2xl border-2 shadow-lg shadow-lime-200  h-screen p-4 mt-4">
+              <Signup />
             </div>
           )}
         </div>

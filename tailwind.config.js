@@ -14,6 +14,9 @@ module.exports = {
       "4xl": "2.441vw",
       "5xl": "3.052vw",
     },
+    // height: {
+    //   128: "70vh",
+    // },
     extend: {
       fontFamily: {
         sans: ["Poppins", "sans-serif"],
