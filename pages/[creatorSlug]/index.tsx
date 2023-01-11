@@ -6,6 +6,8 @@ import supabase from "../../utils/supabaseClient";
 import { profile } from "console";
 import Head from "next/head";
 import AddLink from "../../component/addLink";
+import AddChat from "../../component/chat";
+import Chat from "../../component/chat";
 
 type Link = {
   title: string;
@@ -205,7 +207,7 @@ export default function Home() {
             </div>
           ))}
           {isAuthenticated && (
-            <>
+            <div>
               {create === 1 ? (
                 <AddLink
                   title={title}
@@ -226,16 +228,7 @@ export default function Home() {
                 </button>
               )}
               {create === 2 ? (
-                <AddLink
-                  title={title}
-                  setTitle={setTitle}
-                  url={url}
-                  setUrl={setUrl}
-                  links={links}
-                  setLinks={setLinks}
-                  userId={userId}
-                  setClose={() => setCreate(0)}
-                />
+                <Chat username={creatorSlug} />
               ) : (
                 <button
                   onClick={() => setCreate(2)}
@@ -255,7 +248,7 @@ export default function Home() {
                   />
                 )}
               </div>
-            </>
+            </div>
           )}
         </div>
       </div>
