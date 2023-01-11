@@ -37,16 +37,19 @@ export default function Messages() {
     //   supabase.removeChannel(subsription);
     // };
   }, []);
-  console.log(messages);
   return (
-    <ul className="p-2">
-      {messages.map((e: any) => (
-        <>
-          <p>{e.created_ad}</p>
-          <li key={e.id}>{e.content}</li>
-          <span>{e.profile.username}</span>
-        </>
-      ))}
-    </ul>
+    <div className=" w-1/2 ">
+      <ul className=" justify-end space-y-1 ">
+        {messages.map((e: any) => (
+          <li className="  bg-lime-300 " key={e.id}>
+            <span className="text-black">{e.content}</span>
+
+            <span className="text-sm w-2 p-1  text-gray-800">
+              {e.profile.username}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

@@ -14,7 +14,7 @@ function Chat(props: any) {
       const { error, data } = await supabase
         .from("messages")
         .insert({ content: message });
-      console.log({ error,data });
+      console.log({ error, data });
       if (error) {
         alert(error.message);
       }
@@ -22,7 +22,7 @@ function Chat(props: any) {
   };
 
   return (
-    <div className="items-stretch flex flex-col">
+    <div className=" h-max w-full items-center justify-center">
       <h1>{username}</h1>
       <Messages />
       <form className="w-full" onSubmit={handleSubmit}>

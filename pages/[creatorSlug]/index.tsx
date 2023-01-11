@@ -206,6 +206,8 @@ export default function Home() {
               {link.title}
             </div>
           ))}
+          <Chat username={creatorSlug} />
+
           {isAuthenticated && (
             <div>
               {create === 1 ? (
@@ -228,7 +230,7 @@ export default function Home() {
                 </button>
               )}
               {create === 2 ? (
-                <Chat username={creatorSlug} />
+                <></>
               ) : (
                 <button
                   onClick={() => setCreate(2)}
