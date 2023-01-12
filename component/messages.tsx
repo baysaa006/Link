@@ -12,9 +12,7 @@ export default function Messages() {
   const [messages, setMessages] = useState<Message[]>([]);
 
   const getMessages = async () => {
-    const { data, error } = await supabase
-      .from("messages")
-      .select("*, profile:users(username)");
+    const { data, error } = await supabase.from("messages").select("*");
     if (!data) {
       alert("no data");
       return;
@@ -44,9 +42,9 @@ export default function Messages() {
           <li className="  bg-lime-300 " key={e.id}>
             <span className="text-black">{e.content}</span>
 
-            <span className="text-sm w-2 p-1  text-gray-800">
+            {/* <span className="text-sm w-2 p-1  text-gray-800">
               {e.profile.username}
-            </span>
+            </span> */}
           </li>
         ))}
       </ul>
