@@ -6,8 +6,8 @@ import supabase from "../../utils/supabaseClient";
 import { profile } from "console";
 import Head from "next/head";
 import AddLink from "../../component/addLink";
-import AddChat from "../../component/chat";
-import Chat from "../../component/chat";
+import AddChat from "./chat";
+import Chat from "./chat";
 
 type Link = {
   title: string;
@@ -206,6 +206,7 @@ export default function Home() {
               {link.title}
             </div>
           ))}
+
           <Chat username={creatorSlug} />
 
           {isAuthenticated && (

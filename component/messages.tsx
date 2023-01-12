@@ -36,8 +36,8 @@ export default function Messages() {
     // };
   }, []);
   return (
-    <div className=" w-1/2 ">
-      <ul className=" justify-end space-y-1 ">
+    <div className="w-60">
+      <ul className="justify-end space-y-1 ">
         {messages.map((e: any) => (
           <li className="  bg-lime-300 " key={e.id}>
             <span className="text-black">{e.content}</span>

@@ -1,7 +1,7 @@
 import React from "react";
-import supabase from "../utils/supabaseClient";
+import supabase from "../../utils/supabaseClient";
 import { useEffect } from "react";
-import Messages from "./messages";
+import Messages from "../../component/messages";
 function Chat(props: any) {
   const { username, ...other } = props;
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
