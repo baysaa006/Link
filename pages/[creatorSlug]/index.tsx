@@ -118,7 +118,6 @@ export default function Home() {
       console.log("error: ", error);
     }
   };
-
   return (
     <>
       <Head>
@@ -206,9 +205,6 @@ export default function Home() {
               {link.title}
             </div>
           ))}
-
-          <Chat username={creatorSlug} />
-
           {isAuthenticated && (
             <div>
               {create === 1 ? (

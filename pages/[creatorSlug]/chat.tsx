@@ -2,6 +2,7 @@ import React from "react";
 import supabase from "../../utils/supabaseClient";
 import { useEffect } from "react";
 import Messages from "../../component/messages";
+import Head from "next/head";
 function Chat(props: any) {
   const { username, ...other } = props;
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,7 +23,10 @@ function Chat(props: any) {
   };
 
   return (
-    <div className=" h-max w-full items-center justify-center">
+    <div className=" h-max w-full items-center justify-center p-5">
+      <Head>
+        <title>{`${username}'s chat`}</title>
+      </Head>
       <h1>{username}</h1>
       <Messages />
       <form className="w-full" onSubmit={handleSubmit}>
