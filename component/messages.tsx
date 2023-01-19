@@ -11,8 +11,6 @@ type Message = {
 };
 export default function Messages() {
   const [messages, setMessages] = useState<Message[]>([]);
-  const user = useUser();
-
   const getMessages = async () => {
     const { data, error } = await supabase.from("messages").select("*");
     if (!data) {
@@ -37,10 +35,9 @@ export default function Messages() {
     //   supabase.removeChannel(subsription);
     // };
   }, []);
-  console.log(user);
   return (
-    <div className="w-60">
-      <ul className="justify-end space-y-1 ">
+    <div className=" w-full ">
+      <ul className="justify-end space-y-1">
         {messages.map((e: any) => (
           <li className="  bg-lime-300 p-2 " key={e.id}>
             <span className="text-black">{e.content}</span>

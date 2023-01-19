@@ -15,7 +15,7 @@ function Home() {
       </Head>
       <div className="h-screen">
         <div className="h-screen  flex flex-col items-center bg-opacity-5 mix-blend-hard-light rounded-2xl border-2 w-full p-4">
-          <div className="w-full text-xl font-extrabold rounded-2xl border-2 h-max  items-center flex flex-row justify-around p-3">
+          <div className="w-full  text-xl font-extrabold rounded-2xl border-2 h-max  items-center flex flex-row justify-around p-3">
             <a
               className={`font-extrabold  flex  cursor-pointer  rounded-2xl p-2 ${
                 active === 0
@@ -28,7 +28,7 @@ function Home() {
               <Image height={25} src={logo} alt="logo" />
               <h1>Chatly</h1>
             </a>
-            <ul className="flex flex-row gap-[2vw]">
+            <ul className="flex flex-row md: gap-[2vw]">
               <li
                 className={`font-extrabold  cursor-pointer  rounded-2xl p-2 ${
                   active === 1

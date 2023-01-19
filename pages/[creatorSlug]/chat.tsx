@@ -7,8 +7,7 @@ import Head from "next/head";
 type chat = {
   username: string;
 };
-function Chat(props: chat) {
-  const { username, ...other } = props;
+function Chat() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -27,13 +26,13 @@ function Chat(props: chat) {
   };
 
   return (
-    <div className=" h-max w-full items-center justify-center p-5">
-      <Head>
-        <title>{`${username}'s chat`}</title>
-      </Head>
-      <h1>{username}</h1>
-      <Messages />
-      <form className="w-full" onSubmit={handleSubmit}>
+    <div className="h-screen w-full items-center justify-center flex flex-col gap-4 p-5 ">
+      <Head>{/* <title>{`${username}'s chat`}</title> */}</Head>
+      <div className="h-80 w-3/5 overflow-y-scroll">
+        {" "}
+        <Messages />
+      </div>
+      <form className="" onSubmit={handleSubmit}>
         <input className=" text-black" type="text" name="message" />
       </form>
     </div>
