@@ -88,7 +88,7 @@ export default function Home() {
     if (creatorSlug) {
       getUser();
     }
-  }, [creatorSlug]);
+  }, [creatorSlug, router]);
 
   const logOut = async () => {
     const resp = await supabase.auth.signOut();
