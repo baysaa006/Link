@@ -3,7 +3,11 @@ import supabase from "../../utils/supabaseClient";
 import { useEffect } from "react";
 import Messages from "../../component/messages";
 import Head from "next/head";
-function Chat(props: any) {
+
+type chat = {
+  username: string;
+};
+function Chat(props: chat) {
   const { username, ...other } = props;
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
