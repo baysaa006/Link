@@ -41,7 +41,7 @@ export default function Signup() {
       <Head>
         <title>Sign up</title>
       </Head>
-      <div className="flex flex-col  gap-[1vw]   w-full justify-center items-center">
+      <div className="flex flex-col  gap-3   w-full justify-center items-center">
         <label htmlFor="email" className="block text-sm font-medium ">
           <h1 className="text-base">Username</h1>
         </label>
