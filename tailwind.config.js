@@ -6,9 +6,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["Poppins", "sans-serif"],
-      },
       backgroundImage: {
         hero: "url('../public/img/noise.webp')",
       },
