@@ -50,6 +50,12 @@ function ChildrenComponent(id: any) {
           </section>
         )}
         {id.id === 2 && <Signup />}
+                {id.id === 3 && <Signup />}
+
+        {id.id === 4 && <Signup />}
+
+        {id.id === 5 && <Signup />}
+
       </div>
     </section>
   );
