@@ -9,9 +9,6 @@ export default function Login() {
   const [username, setUsername] = useState<string | undefined>();
   const router = useRouter();
 
-  // useEffect(()=>{
-
-  // })
   async function signInWithEmail() {
     try {
       if (email && password) {
