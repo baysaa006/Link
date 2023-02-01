@@ -1,7 +1,7 @@
 import React from "react";
 import supabase from "../../utils/supabaseClient";
 import { useEffect } from "react";
-import Messages from "../../component/messages";
+import Messages from "../../component/profile/chat/messages";
 import Head from "next/head";
 
 type chat = {

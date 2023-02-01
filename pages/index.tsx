@@ -3,8 +3,7 @@ import router from "next/router";
 import React, { useState } from "react";
 import Image from "next/image";
 import logo from "../public/favicon.svg";
-import Signup from "../component/signup";
-import Login from "../component/login";
+import Login from "../component/registerPages/signin";
 import { useRef } from "react";
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
 import {
@@ -14,7 +13,7 @@ import {
   useTransform,
   MotionValue,
 } from "framer-motion";
-import AddLink from "../component/addLink";
+import AddLink from "../component/profile/links/addLink";
 import Hero from "../component/landingPage/hero";
 
 function useParallax(value: MotionValue<number>, distance: number) {
@@ -49,10 +48,10 @@ function ChildrenComponent(id: any) {
             <div>11</div>
           </section>
         )}
-        {id.id === 2 && <Signup />}
-        {id.id === 3 && <Signup />}
-        {id.id === 4 && <Signup />}
-        {id.id === 5 && <Signup />}
+        {id.id === 2 && 1}
+        {id.id === 3 && 2}
+        {id.id === 4 && 3}
+        {id.id === 5 && 4}
       </div>
     </section>
   );
@@ -69,19 +68,6 @@ function Home() {
       <Head>
         <title>Chatly</title>
       </Head>
-      <nav className="fixed top-0  py-4  z-40 w-full m-0  flex flex-row justify-around backdrop-blur-lg  transition-colors duration-500 lg:z-50 lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06]   dark:bg-[#131517] ">
-        <a href="#" className="cursor-pointer">
-          <h1>Chatly</h1>
-        </a>
-        <div>
-          <button
-            onClick={() => router.push("/signin")}
-            className="border-none"
-          >
-            Sign in
-          </button>
-        </div>
-      </nav>{" "}
       <section className="h-screen">
         {[1, 2, 3, 4, 5].map((image, index) => (
           <ChildrenComponent key={index} id={image} />

@@ -5,9 +5,7 @@ import { useRouter } from "next/router";
 import supabase from "../../utils/supabaseClient";
 import { profile } from "console";
 import Head from "next/head";
-import AddLink from "../../component/addLink";
-import AddChat from "./chat";
-import Chat from "./chat";
+import AddLink from "../../component/profile/links/addLink";
 
 type Link = {
   title: string;
@@ -72,7 +70,6 @@ export default function Home() {
           .select("id, profile_picture_url")
           .eq("username", creatorSlug);
         if (error) throw error;
-
         const profilePictureUrl = data[0]["profile_picture_url"];
         const userId = data[0]["id"];
         setProfilePictureUrl(profilePictureUrl);
@@ -124,8 +121,12 @@ export default function Home() {
         <title>{creatorSlug}</title>
       </Head>
       <div className="flex flex-col   items-center  pb-4 justify-between w-full h-screen ">
-        {isAuthenticated && <button onClick={logOut}>Log out</button>}
         <div className="py-8 flex  gap-3 flex-col   h-fit w-full justify-between items-center mt-4">
+          {isAuthenticated && (
+            <button className="mt-8" onClick={logOut}>
+              Log out
+            </button>
+          )}
           {profilePictureUrl && (
             <div className="relative items-center flex flex-col">
               <Image
