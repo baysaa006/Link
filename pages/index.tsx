@@ -72,6 +72,7 @@ function Home() {
         {[1, 2, 3, 4, 5].map((image, index) => (
           <ChildrenComponent key={index} id={image} />
         ))}
+        <div />
         <motion.div
           className="fixed left-0 bottom-3 right-0 h-2 rounded-full bg-white"
           style={{ scaleX }}

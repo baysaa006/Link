@@ -31,7 +31,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const getUser = async () => {
+     const getUser = async () => {
       const user = await supabase.auth.getUser();
       console.log("user", user);
       if (user.data.user) {
@@ -40,7 +40,7 @@ export default function Home() {
         setUserId(userId);
       }
     };
-    getUser();
+     getUser();
   }, []);
 
   useEffect(() => {
