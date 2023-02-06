@@ -6,6 +6,8 @@ import supabase from "../../utils/supabaseClient";
 import { profile } from "console";
 import Head from "next/head";
 import AddLink from "../../component/profile/links/addLink";
+import { useQuery, useQueryClient } from "react-query";
+import { getLinks } from "../api/query";
 
 type Link = {
   title: string;
@@ -17,7 +19,8 @@ export default function Home() {
   const [userId, setUserId] = useState<string | undefined>();
   const [title, setTitle] = useState<string | undefined>();
   const [url, setUrl] = useState<string | undefined>();
-  const [links, setLinks] = useState<Link[]>();
+  const [links, setLinks] = useState<any>();
+  const [products, setProducts]=useState<any>()
   const [create, setCreate] = useState<any>();
   const [images, setImages] = useState<ImageListType>([]);
   const [profilePictureUrl, setProfilePictureUrl] = useState<
@@ -33,7 +36,6 @@ export default function Home() {
   useEffect(() => {
      const getUser = async () => {
       const user = await supabase.auth.getUser();
-      console.log("user", user);
       if (user.data.user) {
         const userId = user.data.user?.id;
         setIsAuthenticated(true);
@@ -43,50 +45,52 @@ export default function Home() {
      getUser();
   }, []);
 
-  useEffect(() => {
-    const getLinks = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("links")
-          .select("title, url")
-          .eq("user_id", userId);
 
-        if (error) throw error;
-        setLinks(data);
-      } catch (error) {
-        console.log("error: ", error);
-      }
-    };
-    if (userId) {
-      getLinks();
-    }
-  }, [userId]);
-
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("users")
-          .select("id, profile_picture_url")
-          .eq("username", creatorSlug);
-        if (error) throw error;
-        const profilePictureUrl = data[0]["profile_picture_url"];
-        const userId = data[0]["id"];
+  const { data:user, error:userError,isLoading:userIsLoading } = useQuery(['user', userId], async () => {
+    try{
+      const { data } = await supabase
+      .from("users")
+          .select(`id, profile_picture_url`)
+      .eq("username", creatorSlug);
+       if (userError) throw userError;
+       if(data){
+ const profilePictureUrl = data[0]["profile_picture_url"]
+        const userId = data[0]["id"]
         setProfilePictureUrl(profilePictureUrl);
         setUserId(userId);
-        if (userId !== userId) {
-          router.push("/");
-        }
-      } catch (error) {
+       }
+    } 
+    
+      catch (error) {
         console.log("error: ", error);
-      }
-    };
-
-    if (creatorSlug) {
-      getUser();
     }
-  }, [creatorSlug, router]);
+    
+  }); 
+  
+ 
+    
+  const { data:Link, error:LinkError,isLoading:LinkIsLoading } = useQuery(['links', userId], async () => {
+    const { data } = await supabase
+      .from("links")
+      .select("title, url")
+      .eq("user_id", userId);
+    if (LinkError) throw LinkError;
+    else  setLinks(data);
+  }); 
 
+  
+  const { data:product, error:productError,isLoading:productIsLoading } = useQuery(['products' ], async () => {
+    const { data } = await supabase
+      .from("products")
+      .select("*")
+    if (productError) throw productError;
+    else setProducts(data);
+
+  }); 
+        console.log(products)
+
+
+  
   const logOut = async () => {
     const resp = await supabase.auth.signOut();
     router.push("/");

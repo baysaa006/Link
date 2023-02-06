@@ -2,30 +2,12 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import router from "next/router";
-import { createClient, Provider, useQuery } from "urql";
-import { UrqlProvider } from "../utils/urql";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { getLinks } from "./api/query";
 export default function App({ Component, pageProps }: AppProps) {
   
-  const TodosQuery = `
-query ProfilesQuery {
-    usersCollection {
-      edges {
-        node {
-          id
-          username
-        
-      }
-    }
-  }
-}
-`;
-  const [result, reexecuteQuery] = useQuery({
-    query: TodosQuery,
-  });
+  const queryClient = new QueryClient()
 
-  // Read the result
-  const { data, fetching, error } = result;
-  console.log(data);
 
   return (
     <>
@@ -48,9 +30,9 @@ query ProfilesQuery {
           </button>
         </div>
       </nav>{" "}
-  <UrqlProvider>        {" "}
+       <QueryClientProvider client={queryClient}>       
         <Component {...pageProps} />
-      </UrqlProvider>
+    </QueryClientProvider>
     </>
   );
 }
