@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useState } from "react";
-import supabase from "../utils/supabaseClient";
+import supabase from "../../utils/supabaseClient";
 
 export default function Signup() {
   const [email, setEmail] = useState<string | undefined>();
