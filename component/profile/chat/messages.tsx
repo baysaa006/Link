@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import supabase from "../../../utils/supabaseClient";
 import { useEffect } from "react";
-import { useUser } from "@supabase/auth-ui-react/dist/esm/src/components/Auth/UserContext";
 type Message = {
   profile: any;
   id: string;
