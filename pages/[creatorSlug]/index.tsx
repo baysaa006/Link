@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import supabase from "../../utils/supabaseClient";
 import Head from "next/head";
 import AddLink from "../../component/profile/links/addLink";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery,  } from "react-query";
 
 type Link = {
   title: string;
@@ -13,6 +13,8 @@ type Link = {
 };
 
 export default  function Home() {
+  const [loading, setLoading] = useState(false);
+
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userId, setUserId] = useState<string | undefined>();
   const [title, setTitle] = useState<string | undefined>();
@@ -30,51 +32,61 @@ export default  function Home() {
   const onChange = (imageList: ImageListType) => {
     setImages(imageList);
   };
-
+  
   useEffect(() => {
-     const getUser = async () => {
+    const getUser = async () => {
       const user = await supabase.auth.getUser();
+      console.log("user", user);
       if (user.data.user) {
         const userId = user.data.user?.id;
         setIsAuthenticated(true);
         setUserId(userId);
-        console.log(""+1)
-
       }
     };
-    getUser()
+
+    getUser();
   }, []);
-  const { data:user, error:userError,isLoading:userIsLoading } = useQuery(['user', userId], async () => {
-    try{
-      const { data } = await supabase
-      .from("users")
-      .select(`id, profile_picture_url`)
-      .eq("username", creatorSlug);
-       if (userError) throw userError;
-        else if(data){
-          
-        const profilePictureUrl = data[0]["profile_picture_url"]
-        const userId = data[0]["id"]
+
+  useEffect(() => {
+    const getLinks = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("links")
+          .select("title, url")
+          .eq("user_id", userId);
+
+        if (error) throw error;
+        setLinks(data);
+      } catch (error) {
+        console.log("error: ", error);
+      }
+    };
+    if (userId) {
+      getLinks();
+    }
+  }, [userId]);
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("users")
+          .select("id, profile_picture_url")
+          .eq("username", creatorSlug);
+        if (error) throw error;
+        const profilePictureUrl = data[0]["profile_picture_url"];
+        const userId = data[0]["id"];
         setProfilePictureUrl(profilePictureUrl);
         setUserId(userId);
-       }
-    } 
-      catch (error) {
+      } catch (error) {
         console.log("error: ", error);
+      }
+    };
+
+    if (creatorSlug) {
+      getUser();
     }
-    
-  }); 
-  
- 
-    
-  const { data:Link, error:LinkError,isLoading:LinkIsLoading } = useQuery(['links', userId], async () => {
-    const { data } = await supabase
-      .from("links")
-      .select("title, url")
-      .eq("user_id", userId);
-    if (LinkError) throw LinkError;
-    else  setLinks(data);
-  }); 
+  }, [creatorSlug]);
 
   
   const { data:product, error:productError,isLoading:productIsLoading } = useQuery(['products' ], async () => {
@@ -84,7 +96,7 @@ export default  function Home() {
     if (productError) throw productError;
     else setProducts(data);
 
-  }); 
+  });  console.log(products)
 
   const logOut = async () => {
     await supabase.auth.signOut();
@@ -114,12 +126,15 @@ export default  function Home() {
       console.log("error: ", error);
     }
   };
+  if (loading) {
+  return <div className="flex items-center justify-center h-screen"> Loading...</div>;
+}
   return (
     <>
       <Head>
         <title>{creatorSlug}</title>
       </Head>
-      <div className="flex flex-col   items-center  pb-4 justify-between w-full h-screen ">
+      <div className="flex flex-col   mt-2 items-center  pb-4 justify-between w-full h-screen ">
         <div className="py-8 flex  gap-3 flex-col   h-fit w-full justify-between items-center mt-4">
           {isAuthenticated && (
             <button className="mt-8" onClick={logOut}>
