@@ -14,7 +14,7 @@ type Link = {
   url: string;
 };
 
-export default function Home() {
+export default  function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userId, setUserId] = useState<string | undefined>();
   const [title, setTitle] = useState<string | undefined>();
@@ -40,27 +40,27 @@ export default function Home() {
         const userId = user.data.user?.id;
         setIsAuthenticated(true);
         setUserId(userId);
+        console.log(""+1)
+
       }
     };
-     getUser();
+    getUser()
   }, []);
-
-
   const { data:user, error:userError,isLoading:userIsLoading } = useQuery(['user', userId], async () => {
     try{
       const { data } = await supabase
       .from("users")
-          .select(`id, profile_picture_url`)
+      .select(`id, profile_picture_url`)
       .eq("username", creatorSlug);
        if (userError) throw userError;
-       if(data){
- const profilePictureUrl = data[0]["profile_picture_url"]
+        else if(data){
+          
+        const profilePictureUrl = data[0]["profile_picture_url"]
         const userId = data[0]["id"]
         setProfilePictureUrl(profilePictureUrl);
         setUserId(userId);
        }
     } 
-    
       catch (error) {
         console.log("error: ", error);
     }
@@ -87,12 +87,9 @@ export default function Home() {
     else setProducts(data);
 
   }); 
-        console.log(products)
 
-
-  
   const logOut = async () => {
-    const resp = await supabase.auth.signOut();
+    await supabase.auth.signOut();
     router.push("/");
   };
   const uploadProfilePicture = async () => {
