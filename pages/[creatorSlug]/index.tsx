@@ -3,11 +3,9 @@ import ImageUploading, { ImageListType } from "react-images-uploading";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import supabase from "../../utils/supabaseClient";
-import { profile } from "console";
 import Head from "next/head";
 import AddLink from "../../component/profile/links/addLink";
 import { useQuery, useQueryClient } from "react-query";
-import { getLinks } from "../api/query";
 
 type Link = {
   title: string;

@@ -2,7 +2,6 @@ import Head from "next/head";
 import React from "react";
 import { useQuery } from "react-query";
 import Signin from "../component/registerPages/signin";
-import { getLinks } from "./api/query";
 
 function Login() {
   return (
