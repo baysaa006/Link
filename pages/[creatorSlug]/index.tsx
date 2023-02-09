@@ -6,6 +6,7 @@ import supabase from "../../utils/supabaseClient";
 import Head from "next/head";
 import AddLink from "../../component/profile/links/addLink";
 import { useQuery,  } from "react-query";
+import { Box } from "@chakra-ui/react";
 
 type Link = {
   title: string;
@@ -14,7 +15,6 @@ type Link = {
 
 export default  function Home() {
   const [loading, setLoading] = useState(false);
-
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userId, setUserId] = useState<string | undefined>();
   const [title, setTitle] = useState<string | undefined>();
@@ -130,7 +130,7 @@ export default  function Home() {
   return <div className="flex items-center justify-center h-screen"> Loading...</div>;
 }
   return (
-    <>
+    <Box bg="grey.700" >
       <Head>
         <title>{creatorSlug}</title>
       </Head>
@@ -148,7 +148,7 @@ export default  function Home() {
                 alt="profile-picture"
                 height={100}
                 width={100}
-                className="rounded-full  border-2 border-lime-300"
+                className="rounded-full  border-2 "
               />
               {isAuthenticated && (
                 <>
@@ -266,6 +266,6 @@ export default  function Home() {
           )}
         </div>
       </div>
-    </>
+    </Box>
   );
 }

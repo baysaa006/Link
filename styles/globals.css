@@ -7,7 +7,6 @@ html,
 body {
   color: white;
   font-family: "Oxygen", sans-serif;
-  background-color: #131517;
   padding: 0;
   margin: 0;
   scroll-snap-type: y mandatory;
