@@ -3,11 +3,11 @@ import { extendTheme ,type ThemeConfig} from "@chakra-ui/react";
 // Global style overrides
 import { styles } from "./styles";
 
-// Foundational style overrides
-// import borders from "./foundations/borders";
+Foundational style overrides
+import borders from "./foundations/borders";
 
-// // Component style overrides
-// import Button from "./components/button";
+// Component style overrides
+import Button from "./components/button";
 
 const overrides = {
   styles,
