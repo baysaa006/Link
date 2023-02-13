@@ -9,13 +9,13 @@ import borders from "./foundations/borders";
 // Component style overrides
 import Button from "./components/button";
 
-// const overrides = {
-//   styles,
-//   // Other foundational style overrides go here
-//   components: {
-//     // Other components go here
-//   },
-// };
+const overrides = {
+  styles,
+  // Other foundational style overrides go here
+  components: {
+    // Other components go here
+  },
+};
 const config: ThemeConfig = {
   initialColorMode: "dark",
   useSystemColorMode: false,
