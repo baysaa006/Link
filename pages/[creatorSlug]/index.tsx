@@ -6,7 +6,6 @@ import supabase from "../../utils/supabaseClient";
 import Head from "next/head";
 import AddLink from "../../component/profile/links/addLink";
 import { useQuery,  } from "react-query";
-import { Box } from "@chakra-ui/react";
 
 type Link = {
   title: string;
@@ -130,7 +129,7 @@ export default  function Home() {
   return <div className="flex items-center justify-center h-screen"> Loading...</div>;
 }
   return (
-    <Box bg="grey.700" >
+    < >
       <Head>
         <title>{creatorSlug}</title>
       </Head>
@@ -266,6 +265,6 @@ export default  function Home() {
           )}
         </div>
       </div>
-    </Box>
+    </>
   );
 }
