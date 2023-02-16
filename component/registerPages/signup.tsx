@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import supabase from "../../utils/supabaseClient";
 
-export default function Signup() {
+export default function Register() {
   const [email, setEmail] = useState<string | undefined>();
   const [password, setPassword] = useState<string | undefined>();
   const [username, setUsername] = useState<string | undefined>();

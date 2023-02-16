@@ -40,7 +40,7 @@ function ChildrenComponent(id: any) {
               <h3 className="text-xl text-slate-400  ">
                 Community success together through collaboration
               </h3>
-              <button className="bg-slate-700 px-5 rounded-lg py-2">
+              <button onClick={()=>router.push("/singup")} className="bg-slate-700 px-5 rounded-lg py-2">
                 Create Link
               </button>
             </div>
